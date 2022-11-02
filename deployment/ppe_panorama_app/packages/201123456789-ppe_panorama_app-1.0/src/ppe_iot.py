@@ -92,7 +92,7 @@ def ppe_handler(image_to_send, cor_data, env, region, deviceId, cameraId):
     copy_to_send = copy.deepcopy(image_to_send)
     # raw image, draw cordon
     # Disable cordon line drawing in S3 file.
-    #cv2.rectangle(copy_to_send, _cordon_coordinates[0], _cordon_coordinates[2], (0, 255, 255), 2)
+    cv2.rectangle(copy_to_send, _cordon_coordinates[0], _cordon_coordinates[2], (0, 255, 255), 2)
     raw_serial = cv2.imencode(".png", copy_to_send)[1].tostring()
     s3_client.Object(bucket, event_data["origin_picture_path"]).put(Body=raw_serial, ContentType="image/PNG")
 
